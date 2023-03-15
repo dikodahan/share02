@@ -1,0 +1,25 @@
+name: Send email with status
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Read status.json file
+        id: read_status
+        run: echo ::set-output name=status::$(cat src/status.json)
+      - name: Send email
+        uses: ankitmishra889/sendgrid-email-action@v1.2
+        with:
+          api_key: ${{ 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 }}
+          from_email: diko.dahan@gmail.com
+          to_email: diko.dahan@gmail.com
+          subject: "Status update"
+          body: |
+            Finish time: ${{ fromJson(steps.read_status.outputs.status).jobCompletedDate }}
+            Total time: ${{ fromJson(steps.read_status.outputs.status).totalJobTime }}
