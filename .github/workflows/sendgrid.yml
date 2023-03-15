@@ -23,5 +23,6 @@ jobs:
           to_email: diko.dahan@gmail.com
           subject: "EPG Creation status update"
           body: |
-            Finish time: ${{ fromJson(steps.read_status.outputs.status).finish_time }}
-            Total time: ${{ fromJson(steps.read_status.outputs.status).total_time }}
+            Your EPG creation has completed!
+            Finish time: ${{ fromJson(steps.read_status.outputs.status).jobCompletedDate }}
+            Total time: ${{ fromJson(steps.read_status.outputs.status).totalJobTime }}
