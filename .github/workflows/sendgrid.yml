@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'src/status.json'
 
 jobs:
   send_email:
@@ -19,7 +21,7 @@ jobs:
           api_key: ${{ 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 }}
           from_email: diko.dahan@gmail.com
           to_email: diko.dahan@gmail.com
-          subject: "Status update"
+          subject: "EPG Creation status update"
           body: |
-            Finish time: ${{ fromJson(steps.read_status.outputs.status).jobCompletedDate }}
-            Total time: ${{ fromJson(steps.read_status.outputs.status).totalJobTime }}
+            Finish time: ${{ fromJson(steps.read_status.outputs.status).finish_time }}
+            Total time: ${{ fromJson(steps.read_status.outputs.status).total_time }}
